@@ -62,22 +62,20 @@ def fetch_source(url):
             data = json.loads(raw_data)
             
             downloads = []
-            source_name = "Unknown"
+            source_name = url.split("/")[-1]
             
             if isinstance(data, dict):
-                source_name = data.get("name", url.split("/")[-1])
+                source_name = data.get("name", source_name)
                 if "downloads" in data and isinstance(data["downloads"], list):
                     downloads = data["downloads"]
                 elif "games" in data and isinstance(data["games"], list):
                     downloads = data["games"]
                 else:
-                    # Check if there is any list of items
                     for val in data.values():
                         if isinstance(val, list) and len(val) > 0 and isinstance(val[0], dict) and ("title" in val[0] or "uris" in val[0]):
                             downloads = val
                             break
             elif isinstance(data, list):
-                source_name = url.split("/")[-1]
                 downloads = data
                 
             return {
@@ -99,7 +97,7 @@ def fetch_source(url):
         }
 
 def main():
-    print(f"Iniciando download de {len(SOURCES)} fontes...")
+    print(f"Buscando atualizacoes de {len(SOURCES)} fontes...")
     results = []
     
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -108,104 +106,65 @@ def main():
             res = future.result()
             results.append(res)
             if res["status"] == "success":
-                print(f"[OK] {res['name']} ({res['count']} itens) - {res['url']}")
+                print(f"[OK] {res['name']} ({res['count']} itens)")
             else:
-                print(f"[ERRO] {res['url']} -> {res['error']}")
+                print(f"[FAIL] {res['url']} -> {res['error']}")
                 
-    # Consolidar
-    all_downloads = []
-    seen_signatures = set()
+    all_clean = []
+    seen = set()
     total_raw = 0
     
     for res in results:
         total_raw += res["count"]
-        source_label = res["name"]
         for item in res["downloads"]:
             if not isinstance(item, dict):
                 continue
             title = str(item.get("title", "")).strip()
-            uris = item.get("uris", [])
-            
-            # Garantir formato de uris como lista de strings
-            if isinstance(uris, str):
-                uris = [uris]
-            elif not isinstance(uris, list):
-                uris = []
+            raw_uris = item.get("uris", [])
+            if isinstance(raw_uris, str):
+                raw_uris = [raw_uris]
+            elif not isinstance(raw_uris, list):
+                raw_uris = []
                 
-            # Assinatura de desduplicação exata (mesmo título + primeiras URIs)
-            uris_sig = tuple(sorted([str(u) for u in uris]))
-            item_sig = (title.lower(), uris_sig)
-            
-            if item_sig in seen_signatures:
+            uris = [str(u).strip() for u in raw_uris if str(u).strip() and (str(u).startswith("http") or str(u).startswith("magnet:"))]
+            if not title or not uris:
                 continue
-            seen_signatures.add(item_sig)
-            
-            # Anotar ou manter campos
-            cleaned_item = dict(item)
-            cleaned_item["uris"] = uris
-            if "title" not in cleaned_item or not cleaned_item["title"]:
-                cleaned_item["title"] = title or "Unknown Game"
                 
-            all_downloads.append(cleaned_item)
+            sig = (title.lower(), tuple(sorted(uris)))
+            if sig in seen:
+                continue
+            seen.add(sig)
             
-    print("\n" + "="*50)
-    print(f"Fontes processadas: {len(results)}")
-    successful = [r for r in results if r["status"] == "success"]
-    failed = [r for r in results if r["status"] == "error"]
-    print(f"Sucessos: {len(successful)} | Falhas: {len(failed)}")
-    print(f"Total bruto de downloads encontrados: {total_raw}")
-    print(f"Total apos deduplicacao: {len(all_downloads)}")
-    print("="*50)
+            upload_date = str(item.get("uploadDate") or "2024-01-01T00:00:00.000Z")
+            file_size = str(item.get("fileSize") or "N/A")
+            
+            all_clean.append({
+                "title": title,
+                "uris": uris,
+                "uploadDate": upload_date,
+                "fileSize": file_size
+            })
+            
+    print(f"Total bruto: {total_raw} | Limpos e desduplicados: {len(all_clean)}")
     
-    mega_repo = {
-        "name": "Mega Hydra Source (Unificada)",
-        "description": f"Mega repositorio unificado com {len(successful)} fontes do Hydra Launcher.",
-        "updatedAt": datetime.utcnow().isoformat() + "Z",
-        "sourcesCount": len(successful),
-        "downloadsCount": len(all_downloads),
-        "sources": [
-            {
-                "name": r["name"],
-                "url": r["url"],
-                "count": r["count"]
-            } for r in successful
-        ],
-        "downloads": all_downloads
+    # Ordenar pelos mais recentes para garantir que jogos novos fiquem priorizados
+    all_clean.sort(key=lambda x: x.get("uploadDate", ""), reverse=True)
+    
+    # Limitar aos 80.000 títulos para respeitar o limite de tamanho e timeout da API do Hydra (~28 MB)
+    max_games = 80000
+    curated = all_clean[:max_games]
+    
+    payload = {
+        "name": "Mega Hydra Source (Auto-Updated)",
+        "downloads": curated
     }
     
-    output_dir = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(output_dir, "mega_source.json")
-    min_json_path = os.path.join(output_dir, "mega_source.min.json")
-    summary_path = os.path.join(output_dir, "summary.json")
-    
-    print(f"Salvando {json_path}...")
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(mega_repo, f, ensure_ascii=False, indent=2)
+    out_dir = os.path.dirname(os.path.abspath(__file__))
+    out_file = os.path.join(out_dir, "mega_source.json")
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(payload, f, separators=(',', ':'), ensure_ascii=False)
         
-    print(f"Salvando {min_json_path} (compacto)...")
-    with open(min_json_path, "w", encoding="utf-8") as f:
-        json.dump(mega_repo, f, ensure_ascii=False, separators=(',', ':'))
-        
-    # Salvar resumo de status
-    with open(summary_path, "w", encoding="utf-8") as f:
-        summary = {
-            "total_sources": len(SOURCES),
-            "successful_sources": len(successful),
-            "failed_sources": len(failed),
-            "total_items_raw": total_raw,
-            "total_items_dedup": len(all_downloads),
-            "successful": [
-                {"name": r["name"], "url": r["url"], "count": r["count"]}
-                for r in successful
-            ],
-            "failed": [
-                {"url": r["url"], "error": r["error"]}
-                for r in failed
-            ]
-        }
-        json.dump(summary, f, ensure_ascii=False, indent=2)
-
-    print("Concluido com sucesso!")
+    print(f"Salvo com sucesso em {out_file}: {len(curated)} jogos ({os.path.getsize(out_file)/1024/1024:.2f} MB)")
 
 if __name__ == "__main__":
     main()
