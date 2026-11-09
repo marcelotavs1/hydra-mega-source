@@ -5,3 +5,6 @@ mega_source.min.json
 # Python
 __pycache__/
 *.pyc
+
+sources/
+
