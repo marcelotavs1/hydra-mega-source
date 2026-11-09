@@ -1,0 +1,13 @@
+{
+  "name": "Test Source",
+  "downloads": [
+    {
+      "title": "Celeste",
+      "uris": [
+        "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567"
+      ],
+      "uploadDate": "2024-01-01T00:00:00.000Z",
+      "fileSize": "1.2 GB"
+    }
+  ]
+}
