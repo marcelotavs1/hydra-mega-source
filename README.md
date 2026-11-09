@@ -1,54 +1,38 @@
 # Mega Repositório / Fonte Unificada para Hydra Launcher
 
-Este repositório consolida 36 fontes públicas do Hydra Launcher em uma única fonte mestre com **555.280 downloads desduplicados**.
+Repositório oficial gerado com **555.280 downloads únicos consolidados** a partir de 33 fontes públicas do Hydra Launcher.
+
+---
+
+## 🔗 URL para Adicionar no Hydra Launcher
+
+Copie e cole a seguinte URL nas **Configurações > Fontes de Download** do seu Hydra Launcher:
+
+```text
+https://github.com/marcelotavs1/hydra-mega-source/releases/download/v1.0.0/mega_source.min.json
+```
 
 ---
 
 ## 📊 Estatísticas da Compilação
 
-- **Total de fontes consultadas:** 36
-- **Fontes obtidas com sucesso:** 33
-- **Downloads brutos encontrados:** 570.770
-- **Downloads únicos consolidados:** 555.280
-- **Arquivos gerados:**
-  - `mega_source.json` (~364 MB, formatado com indentação)
-  - `mega_source.min.json` (~318 MB, minificado para carregamento mais leve)
-  - `summary.json` (relatório de status de cada fonte)
+- **Fontes analisadas:** 36
+- **Fontes ativas com sucesso:** 33
+- **Downloads brutos:** 570.770
+- **Downloads únicos após deduplicação:** 555.280
+- **Tamanho do arquivo:** ~318 MB (`mega_source.min.json`)
 
 ---
 
-## 🚀 Como Usar no Hydra Launcher
+## 🔄 Como Atualizar a Base
 
-### Opção 1: Servidor Local (Uso imediato no seu PC)
+Para sincronizar novas versões das fontes e gerar uma nova release:
 
-Como o arquivo consolidado tem ~318 MB, você pode rodá-lo localmente na sua máquina:
-
-1. Abra o terminal nesta pasta:
+1. Execute o script de compilação:
    ```powershell
-   cd C:\Users\marce\.gemini\antigravity\scratch\hydra-mega-source
-   python -m http.server 8080
+   python build_mega_repo.py
    ```
-2. No Hydra Launcher:
-   - Vá em **Configurações** > **Fontes de Download** (Sources).
-   - Adicione a URL:
-     ```
-     http://localhost:8080/mega_source.min.json
-     ```
-
----
-
-### Opção 2: Hospedar na Web (GitHub Releases / Cloudflare Pages)
-
-Devido ao limite de 100 MB para arquivos normais em commits do GitHub:
-- **GitHub Releases:** Crie um repositório no GitHub, crie uma "Release" (ex: `v1.0.0`) e faça o upload do `mega_source.min.json` como asset anexado. A URL direta da release poderá ser inserida no Hydra Launcher.
-- **Cloudflare Pages / R2 / Pastebin grande:** Você pode hospedar o arquivo em um bucket R2 gratuito com link público.
-
----
-
-## 🔄 Como Atualizar a Mega Fonte
-
-Para baixar novamente todas as fontes e gerar uma nova versão atualizada:
-
-```powershell
-python build_mega_repo.py
-```
+2. Crie uma nova tag/release no GitHub:
+   ```powershell
+   gh release create v1.0.1 mega_source.min.json --title "Mega Hydra Source v1.0.1"
+   ```
