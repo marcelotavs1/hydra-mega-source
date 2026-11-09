@@ -1,0 +1,7 @@
+# Ignorar arquivos grandes de dump JSON do commit do git
+mega_source.json
+mega_source.min.json
+
+# Python
+__pycache__/
+*.pyc

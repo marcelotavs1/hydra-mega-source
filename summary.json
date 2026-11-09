@@ -1,0 +1,188 @@
+{
+  "total_sources": 36,
+  "successful_sources": 33,
+  "failed_sources": 3,
+  "total_items_raw": 570770,
+  "total_items_dedup": 555280,
+  "successful": [
+    {
+      "name": "SteamRIP",
+      "url": "https://raw.githubusercontent.com/vinikjkkj/game-links-collection/refs/heads/master/jsons/steamrip.json",
+      "count": 5068
+    },
+    {
+      "name": "AnkerGames",
+      "url": "https://wkeynhk.online/ankergames.json",
+      "count": 1237
+    },
+    {
+      "name": "RuTracker Pre-Installed",
+      "url": "https://raw.githubusercontent.com/blaidq-a/rutracker-only-portable/refs/heads/main/source.json",
+      "count": 7195
+    },
+    {
+      "name": "GameBounty",
+      "url": "https://raw.githubusercontent.com/BITO21/BITO_sources/refs/heads/master/GameBounty.json",
+      "count": 5564
+    },
+    {
+      "name": "Repack Igruha",
+      "url": "https://raw.githubusercontent.com/sotik11/hydra-download-sources/main/data/repack-igruha.json",
+      "count": 12727
+    },
+    {
+      "name": "Skidrow (By Merabet4mine)",
+      "url": "https://raw.githubusercontent.com/Merabet4mine/merabet4mine.github.io/refs/heads/master/assets/skidrow.json",
+      "count": 92522
+    },
+    {
+      "name": "SteamUnderground",
+      "url": "https://raw.githubusercontent.com/Smealm/hydra-launcher-stuff/refs/heads/main/hydra%20sources/FMHY/steam%20undergound/steamunderground.json",
+      "count": 2308
+    },
+    {
+      "name": "WorldOfPCGames",
+      "url": "https://raw.githubusercontent.com/Smealm/hydra-launcher-stuff/refs/heads/main/hydra%20sources/FMHY/world%20of%20pc%20games/worldofpcgames.json",
+      "count": 12008
+    },
+    {
+      "name": "Free Linux",
+      "url": "https://ggvv13.github.io/Linux-Games.json",
+      "count": 990
+    },
+    {
+      "name": "FUCK STEAM",
+      "url": "https://fuck-steam.netlify.app/FONTE.json",
+      "count": 231
+    },
+    {
+      "name": "SkidrowReloaded",
+      "url": "https://raw.githubusercontent.com/Altansar69/Hydra-Library/refs/heads/main/hydra-skidrowreloaded/skidrow_cleaned.json",
+      "count": 110287
+    },
+    {
+      "name": "Fitgirl",
+      "url": "https://raw.githubusercontent.com/vinikjkkj/game-links-collection/refs/heads/master/jsons/fitgirl.json",
+      "count": 6419
+    },
+    {
+      "name": "DDLC Mods PT-BR | Fonte por Gabihhz (github.com/Gabihhz/ddlc-ptbr-fonte)",
+      "url": "https://raw.githubusercontent.com/Gabihhz/ddlc-ptbr-fonte/main/fonte.json?v=55",
+      "count": 53
+    },
+    {
+      "name": "SukiH",
+      "url": "https://gist.githubusercontent.com/SawwyReis/8ec9011acc87b101c355636a320f4172/raw/690950e58ed51ee9d1ad077467a26c810da77b40/SukiH.json",
+      "count": 37
+    },
+    {
+      "name": "Iris Hub",
+      "url": "https://raw.githubusercontent.com/irisihrz/json/refs/heads/main/irishub.json",
+      "count": 72288
+    },
+    {
+      "name": "freetp by hydrasources.su",
+      "url": "https://hydrasources.su/freetp_games.json",
+      "count": 3147
+    },
+    {
+      "name": "VX VULGO",
+      "url": "https://vxvulgooficial.github.io/vxvulgooficial/vxvulgo.json",
+      "count": 2041
+    },
+    {
+      "name": "FreeTP",
+      "url": "https://gitlab.com/BadKiko/freetp-hydra-link/-/raw/main/games.json",
+      "count": 2918
+    },
+    {
+      "name": "NEXUS",
+      "url": "https://nexusbuildcompany.github.io/nexus.json",
+      "count": 4404
+    },
+    {
+      "name": "LinuxRuleZ Repacks",
+      "url": "https://gitlab.com/h4rq/linuxrulez-hydra-h4rqqqq11/-/raw/main/linuxrulez_hydra.json",
+      "count": 12389
+    },
+    {
+      "name": "Rutor",
+      "url": "https://raw.githubusercontent.com/sotik11/hydra-download-sources/main/data/rutor.json",
+      "count": 25299
+    },
+    {
+      "name": "thelastgame by hydrasources",
+      "url": "https://hydrasources.su/thelastgame.json",
+      "count": 11213
+    },
+    {
+      "name": "Backup GOG-GAMES.TO",
+      "url": "https://gist.githubusercontent.com/sebastian-morgan/a1e9d5db55bb8646d0278384f3dd3a2f/raw/fbc5b6f2aa92e1067d067ae2e49faadec5f68964/backup.json",
+      "count": 34
+    },
+    {
+      "name": "AtopGames",
+      "url": "https://hydralinks.pages.dev/sources/atop-games.json",
+      "count": 1583
+    },
+    {
+      "name": "Dauphong",
+      "url": "https://cesio-138.github.io/dauphong-hydra/sources/dauphong.json",
+      "count": 54634
+    },
+    {
+      "name": "pcgamestorrent",
+      "url": "https://stupidlysimpletextshare.quest/77ae94fb09/pcgames.json",
+      "count": 67276
+    },
+    {
+      "name": "Legacy HUB",
+      "url": "https://gist.githubusercontent.com/sebastian-morgan/4b7bedd9fe5290715d2d95be4283740d/raw/46e621a48ab73be2203ea60977635f5f73a462b9/hub.json",
+      "count": 34
+    },
+    {
+      "name": "GameDrive",
+      "url": "https://raw.githubusercontent.com/BITO21/BITO_sources/refs/heads/master/GameDrive.json",
+      "count": 1373
+    },
+    {
+      "name": "Torrent Igruha",
+      "url": "https://raw.githubusercontent.com/sotik11/hydra-download-sources/main/data/itorrents-igruha.json",
+      "count": 17628
+    },
+    {
+      "name": "GameDrive.org | Updates",
+      "url": "https://raw.githubusercontent.com/BITO21/BITO_sources/refs/heads/master/Updates.json",
+      "count": 527
+    },
+    {
+      "name": "ByRutGame Parser Source (многопоточный, с пагинацией, повторными попытками и точным поиском)",
+      "url": "https://raw.githubusercontent.com/L1MSpace/hydra-sources-byrutgame/refs/heads/main/games_500pages_byrutgame.json",
+      "count": 10849
+    },
+    {
+      "name": "GamesTorrent",
+      "url": "https://raw.githubusercontent.com/Altansar69/Hydra-Library/refs/heads/main/hydra-gamestorrents/gamestorrents.json",
+      "count": 11322
+    },
+    {
+      "name": "nnmclub by hydrasources",
+      "url": "https://hydrasources.su/nnmclub.json",
+      "count": 15165
+    }
+  ],
+  "failed": [
+    {
+      "url": "https://hydralinks.cloud/sources/tinyrepacks.json",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://hydralinks.cloud/sources/dyren.json",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://hydralinks.cloud/sources/gamebounty.json",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ]
+}
