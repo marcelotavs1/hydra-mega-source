@@ -1,10 +1,8 @@
-# Ignorar arquivos grandes de dump JSON do commit do git
-mega_source.json
+# Ignorar dumps brutos muito grandes
+mega_source_clean.json
 mega_source.min.json
+sources/
 
 # Python
 __pycache__/
 *.pyc
-
-sources/
-
