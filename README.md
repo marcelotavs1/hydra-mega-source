@@ -1,38 +1,21 @@
 # Mega Repositório / Fonte Unificada para Hydra Launcher
 
-Repositório oficial gerado com **555.280 downloads únicos consolidados** a partir de 33 fontes públicas do Hydra Launcher.
+Mega repositório consolidado e sanitizado de acordo com o esquema oficial do **Hydra Launcher**.
 
 ---
 
-## 🔗 URL para Adicionar no Hydra Launcher
+## 🔗 URL Oficial (Testada e Aprovada)
 
-Copie e cole a seguinte URL nas **Configurações > Fontes de Download** do seu Hydra Launcher:
+Copie e cole a seguinte URL em **Configurações > Fontes de Download** no Hydra Launcher:
 
 ```text
-https://github.com/marcelotavs1/hydra-mega-source/releases/download/v1.0.0/mega_source.min.json
+https://raw.githubusercontent.com/marcelotavs1/hydra-mega-source/main/mega_source.json
 ```
 
 ---
 
-## 📊 Estatísticas da Compilação
+## ⚙️ Por que a versão anterior falhou?
 
-- **Fontes analisadas:** 36
-- **Fontes ativas com sucesso:** 33
-- **Downloads brutos:** 570.770
-- **Downloads únicos após deduplicação:** 555.280
-- **Tamanho do arquivo:** ~318 MB (`mega_source.min.json`)
-
----
-
-## 🔄 Como Atualizar a Base
-
-Para sincronizar novas versões das fontes e gerar uma nova release:
-
-1. Execute o script de compilação:
-   ```powershell
-   python build_mega_repo.py
-   ```
-2. Crie uma nova tag/release no GitHub:
-   ```powershell
-   gh release create v1.0.1 mega_source.min.json --title "Mega Hydra Source v1.0.1"
-   ```
+1. **Esquema Estrito do Servidor do Hydra:** Cada download precisa ter exatamente os campos `title`, `uris` (mínimo 1 link válido), `uploadDate` e `fileSize`. Metadados extras pesados (requisitos de sistema, trailers, sinopses) que vinham em certas fontes eram rejeitados pelo validador da API.
+2. **Timeout por Tamanho:** Arquivos acima de 100 MB causam timeout no servidor central do Hydra durante o download para validação.
+3. **Redirecionamento temporário de Releases:** Links de GitHub Releases geram links temporários assinados da Azure Storage com expiração de minutos, enquanto links do `raw.githubusercontent.com` são diretos e permanentes.
